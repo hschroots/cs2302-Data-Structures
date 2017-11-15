@@ -2,7 +2,7 @@
 TARGETS = fibn2 fibn_memo fibn_const
 
 CXX = g++
-CXXLAGS = -g
+CXXFLAGS = -g -std=c++11
 
 .PHONY: clean all
 
@@ -19,6 +19,7 @@ fibn_memo : fibn_memo.o
 
 fibn_const : fibn_const.o
 	$(CXX) $(CXXFLAGS) $< -o $@.out
+
 clean:
 	rm *.o
 	rm *.out
