@@ -1,22 +1,22 @@
 #include <iostream>
 #include <string>
-#include <math>
+#include <cmath>
 
-std::map<unsigned long long, unsigned long long> memo;
+#define RECIP_SQRT5 0.447213595499957939281834733746255247088124 
+#define ROOTA  1.61803398874989484820458683436563811772031
+#define ROOTB -0.618033988749894848204586834365638117720309   
 
-unsigned long long fib(const unsigned int &n)
+long long fib(const long double &n)
 {
+	if( n == 0 )
+		return 0;
+	if( n == 1 )
+		return 1; 
 
-	long long root5 = std::sqrt(5);
-	long long c = 1/root5;
+	long double A = pow((long double)ROOTA, (long double)n);
+	long double B = pow((long double)ROOTB, (long double)n);
 
-	long long root1 = ( (1 + root5) / 2 );
-	long long root2 = ( (1 - root5) / 2 );
-
-	long long A = std::pow(root1, n);
-	long long B = std::pow(root2, n);
-
-	return c * A - c * B ;
+	return (long long)ceil(( RECIP_SQRT5 * (A - B)));
 }
 
 int main(void)
@@ -26,9 +26,9 @@ int main(void)
 	std::string input;
 	std::getline(std::cin, input);
 
-	unsigned long long fibnum = stoull(input);
+	long double fibnum = stold(input);
 
-	unsigned long long fibvalue = fib(fibnum);
+	unsigned long long fibvalue = fib(fibnum+1);
 
 	std::cout << "The " << fibnum << "th fibonocci number is " << fibvalue << std::endl;
 			
